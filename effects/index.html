@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="rita akerman">
+<title>3 эффекта для сайта — гайд rita akerman</title>
+<meta name="description" content="Магнитная кнопка, появление при прокрутке и живой фон: живые примеры и код, который можно скопировать.">
+<meta property="og:title" content="3 эффекта для сайта — гайд rita akerman">
+<meta property="og:description" content="Живые примеры и код, который можно скопировать.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  :root {
+    --night: #0B0620;
+    --panel: #140C33;
+    --line: rgba(205, 184, 255, 0.22);
+    --lilac: #CDB8FF;
+    --soft: #C9B6FF;
+    --violet: #6F2CFF;
+    --pink: #FF7AC6;
+    --text: #F4F0FF;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--night); color: var(--text); font: 400 17px/1.55 'Geologica', system-ui, sans-serif; }
+  a { color: var(--lilac); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+
+  header { padding: 28px 0 8px; }
+  .owner { font: 500 14px 'JetBrains Mono', monospace; color: var(--lilac); letter-spacing: 0.04em; text-decoration: none; }
+  .hero { padding: 40px 0 24px; }
+  .hero .tag { font: 700 13px 'JetBrains Mono', monospace; color: var(--lilac); letter-spacing: 0.12em; }
+  .hero h1 { font-size: clamp(36px, 8vw, 64px); line-height: 1.05; margin: 14px 0 16px; font-weight: 600; }
+  .hero p { color: var(--soft); font-size: 19px; margin: 0; max-width: 34em; }
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 0; padding: 0; list-style: none; }
+  .toc a { display: inline-block; padding: 8px 14px; border: 1px solid rgba(255, 255, 255, 0.28); border-radius: 999px; text-decoration: none; font-size: 15px; color: #fff; background: rgba(11, 6, 32, 0.35); }
+  .hero.glow { display: block; place-items: normal; text-align: left; border-radius: 24px; padding: 44px 24px 32px; margin-top: 8px; }
+  .hero.glow p { color: rgba(255, 255, 255, 0.86); }
+  .hero.glow .tag { color: #fff; }
+
+  section.fx { padding: 44px 0 8px; border-top: 1px solid var(--line); margin-top: 36px; }
+  .num { font: 700 14px 'JetBrains Mono', monospace; color: var(--lilac); }
+  section.fx h2 { font-size: clamp(28px, 6vw, 40px); line-height: 1.1; margin: 8px 0 10px; font-weight: 600; }
+  section.fx > p { color: var(--soft); margin: 0 0 18px; }
+  .note { font-size: 15px; color: rgba(244, 240, 255, 0.7); }
+  h3 { font: 700 13px 'JetBrains Mono', monospace; letter-spacing: 0.1em; color: var(--lilac); margin: 22px 0 8px; text-transform: uppercase; }
+
+  .demo { position: relative; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; min-height: 280px; }
+  .demo .label { position: absolute; top: 12px; left: 14px; font: 500 12px 'JetBrains Mono', monospace; color: rgba(205, 184, 255, 0.7); z-index: 2; }
+
+  .code { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; margin: 0 0 12px; }
+  .code pre { margin: 0; padding: 50px 16px 18px; overflow-x: auto; font: 500 13.5px/1.6 'JetBrains Mono', monospace; color: #E9E2FF; tab-size: 2; }
+  .code .lang { display: block; padding: 10px 16px 0; font: 700 11px 'JetBrains Mono', monospace; color: rgba(205, 184, 255, 0.6); letter-spacing: 0.12em; }
+  .copy { position: absolute; top: 8px; right: 8px; font: 600 13px 'Geologica', sans-serif; color: #fff; background: var(--violet); border: 0; border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+  .copy.done { background: #2BB5A0; }
+
+  footer { margin: 56px 0 0; padding: 40px 0 56px; border-top: 1px solid var(--line); }
+  footer h2 { font-size: 28px; line-height: 1.15; margin: 0 0 10px; font-weight: 600; }
+  footer p { color: var(--soft); margin: 0 0 18px; }
+  .cta { display: inline-block; padding: 14px 26px; border-radius: 999px; background: var(--violet); color: #fff; text-decoration: none; font-weight: 600; }
+
+  /* ── 01. Магнитная кнопка ───────────────────────────── */
+  .demo-magnet { display: grid; place-items: center; background: #0E0828; }
+  .demo-magnet .ask { color: rgba(205, 184, 255, 0.8); text-align: center; margin: 0 0 18px; }
+
+  .magnet-zone { display: inline-block; padding: 80px; }
+  .magnet {
+    display: inline-block;
+    padding: 18px 34px;
+    border-radius: 999px;
+    background: #6F2CFF;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 0 40px rgba(111, 44, 255, 0.55);
+    transition: transform 0.25s ease-out;
+  }
+
+  /* ── 02. Появление при прокрутке ─────────────────────── */
+  .demo-reveal { background: #F4F0FF; color: #1C1238; height: 360px; overflow-y: auto; padding: 44px 18px 18px; }
+  .demo-reveal h4 { margin: 0 0 14px; font-size: 26px; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .card .pic { aspect-ratio: 4 / 3; border-radius: 12px; }
+  .card b { display: block; margin-top: 8px; font-size: 14px; }
+  .card span { font-size: 12px; color: #8E86A6; }
+  .c1 { background: linear-gradient(135deg, #6F2CFF, #B79CFF); }
+  .c2 { background: linear-gradient(135deg, #FF7AC6, #FFC4E4); }
+  .c3 { background: linear-gradient(135deg, #2BB5A0, #A9EBDD); }
+  .scroll-hint { position: absolute; bottom: 10px; right: 14px; font: 500 12px 'JetBrains Mono', monospace; color: #8E86A6; }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── 03. Живой фон ───────────────────────────────────── */
+  .glow {
+    position: relative;
+    overflow: hidden;
+    background: #0B0620;
+    display: grid;
+    place-items: center;
+    text-align: center;
+  }
+  .glow::before,
+  .glow::after {
+    content: "";
+    position: absolute;
+    width: 60vmax;
+    height: 60vmax;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.75;
+    animation: drift 6s ease-in-out infinite alternate;
+  }
+  .glow::before { background: #6F2CFF; top: -20%; left: -10%; }
+  .glow::after {
+    background: #FF7AC6; bottom: -25%; right: -15%;
+    animation: drift-back 8s ease-in-out infinite alternate-reverse;
+  }
+  .glow > * { position: relative; z-index: 1; }
+
+  @keyframes drift {
+    to { transform: translate(15vmax, 10vmax) scale(1.2); }
+  }
+  @keyframes drift-back {
+    to { transform: translate(-15vmax, -10vmax) scale(1.2); }
+  }
+
+  .demo-glow { min-height: 320px; }
+  .demo-glow small { font: 500 12px 'JetBrains Mono', monospace; letter-spacing: 0.12em; color: rgba(255, 255, 255, 0.75); }
+  .demo-glow strong { display: block; font-size: clamp(36px, 9vw, 64px); font-weight: 600; margin-top: 6px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glow::before, .glow::after { animation: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .magnet { transition: none; }
+  }
+  @media (max-width: 560px) {
+    .cards { grid-template-columns: repeat(2, 1fr); }
+    .magnet-zone { padding: 40px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="owner" href="https://instagram.com/rita.akerman">rita akerman · @rita.akerman</a></header>
+
+    <div class="hero glow">
+      <div class="tag">БЕСПЛАТНЫЙ ГАЙД</div>
+      <h1>3 эффекта для сайта</h1>
+      <p>Магнитная кнопка, появление при прокрутке и живой фон. Под каждым — живой пример и код без библиотек: копируешь, вставляешь, работает.</p>
+      <ul class="toc">
+        <li><a href="#magnet">01 Магнитная кнопка</a></li>
+        <li><a href="#reveal">02 Появление</a></li>
+        <li><a href="#glow">03 Живой фон</a></li>
+      </ul>
+    </div>
+
+    <!-- 01 -->
+    <section class="fx" id="magnet">
+      <div class="num">01 / 03</div>
+      <h2>Магнитная кнопка</h2>
+      <p>Когда курсор рядом, кнопка тянется к нему, а когда уходит — мягко возвращается. Лучше всего на главной кнопке: «Написать», «Записаться», «Купить».</p>
+      <div class="demo demo-magnet">
+        <span class="label">наведи курсор на кнопку</span>
+        <div>
+          <p class="ask">Есть задача?</p>
+          <div class="magnet-zone"><a class="magnet" href="#magnet">Написать мне</a></div>
+        </div>
+      </div>
+      <p class="note">На телефоне курсора нет — там кнопка просто нажимается, ничего не ломается.</p>
+
+      <h3>HTML</h3>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>&lt;div class="magnet-zone"&gt;
+  &lt;a class="magnet" href="#contact"&gt;Написать мне&lt;/a&gt;
+&lt;/div&gt;</code></pre></div>
+
+      <h3>CSS</h3>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>.magnet-zone {
+  display: inline-block;
+  padding: 80px; /* зона, в которой кнопка «чувствует» курсор */
+}
+.magnet {
+  display: inline-block;
+  padding: 18px 34px;
+  border-radius: 999px;
+  background: #6F2CFF;
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.25s ease-out;
+}</code></pre></div>
+
+      <h3>JavaScript</h3>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>document.querySelectorAll('.magnet-zone').forEach((zone) =&gt; {
+  const button = zone.querySelector('.magnet');
+
+  zone.addEventListener('pointermove', (event) =&gt; {
+    const box = button.getBoundingClientRect();
+    const x = event.clientX - (box.left + box.width / 2);
+    const y = event.clientY - (box.top + box.height / 2);
+    button.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+  });
+
+  zone.addEventListener('pointerleave', () =&gt; {
+    button.style.transform = '';
+  });
+});</code></pre></div>
+      <p class="note">Сила притяжения — число 0.3: больше — тянется сильнее. Размер зоны — padding у .magnet-zone.</p>
+    </section>
+
+    <!-- 02 -->
+    <section class="fx" id="reveal">
+      <div class="num">02 / 03</div>
+      <h2>Появление при прокрутке</h2>
+      <p>Блоки проявляются и чуть поднимаются, когда до них долистали. Внимание идёт по странице сверху вниз, а не разбегается сразу по всему.</p>
+      <div class="demo">
+        <div class="demo-reveal" id="reveal-box">
+          <h4>Работы</h4>
+          <div class="cards">
+            <div class="card reveal"><div class="pic c1"></div><b>Проект 01</b><span>сайт</span></div>
+            <div class="card reveal" style="transition-delay: 0.1s"><div class="pic c2"></div><b>Проект 02</b><span>лендинг</span></div>
+            <div class="card reveal" style="transition-delay: 0.2s"><div class="pic c3"></div><b>Проект 03</b><span>магазин</span></div>
+            <div class="card reveal"><div class="pic c1"></div><b>Проект 04</b><span>сайт</span></div>
+            <div class="card reveal" style="transition-delay: 0.1s"><div class="pic c2"></div><b>Проект 05</b><span>лендинг</span></div>
+            <div class="card reveal" style="transition-delay: 0.2s"><div class="pic c3"></div><b>Проект 06</b><span>магазин</span></div>
+            <div class="card reveal"><div class="pic c1"></div><b>Проект 07</b><span>сайт</span></div>
+            <div class="card reveal" style="transition-delay: 0.1s"><div class="pic c2"></div><b>Проект 08</b><span>лендинг</span></div>
+            <div class="card reveal" style="transition-delay: 0.2s"><div class="pic c3"></div><b>Проект 09</b><span>магазин</span></div>
+          </div>
+        </div>
+        <span class="scroll-hint">листай внутри ↓</span>
+      </div>
+
+      <h3>HTML</h3>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>&lt;div class="card reveal"&gt;…&lt;/div&gt;
+&lt;div class="card reveal" style="transition-delay: 0.1s"&gt;…&lt;/div&gt;
+&lt;div class="card reveal" style="transition-delay: 0.2s"&gt;…&lt;/div&gt;</code></pre></div>
+
+      <h3>CSS</h3>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}</code></pre></div>
+
+      <h3>JavaScript</h3>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>const observer = new IntersectionObserver((entries) =&gt; {
+  for (const entry of entries) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target); // показали один раз — больше не следим
+    }
+  }
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.reveal').forEach((el) =&gt; observer.observe(el));</code></pre></div>
+      <p class="note">threshold: 0.2 — блок появляется, когда видно 20 % его высоты. transition-delay даёт соседям появиться по очереди.</p>
+    </section>
+
+    <!-- 03 -->
+    <section class="fx" id="glow">
+      <div class="num">03 / 03</div>
+      <h2>Живой фон</h2>
+      <p>Два мягких пятна цвета медленно плывут за текстом. Только CSS: ни картинок, ни видео, страница не тяжелеет.</p>
+      <div class="demo glow demo-glow">
+        <div><small>WEB DESIGNER · IT CREATOR</small><strong>rita akerman</strong></div>
+      </div>
+
+      <h3>HTML</h3>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>&lt;section class="glow"&gt;
+  &lt;h1&gt;Заголовок&lt;/h1&gt;
+&lt;/section&gt;</code></pre></div>
+
+      <h3>CSS</h3>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>.glow {
+  position: relative;
+  overflow: hidden;
+  background: #0B0620;
+}
+.glow::before,
+.glow::after {
+  content: "";
+  position: absolute;
+  width: 60vmax;
+  height: 60vmax;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.75;
+  animation: drift 6s ease-in-out infinite alternate;
+}
+.glow::before { background: #6F2CFF; top: -20%; left: -10%; }
+.glow::after {
+  background: #FF7AC6; bottom: -25%; right: -15%;
+  animation: drift-back 8s ease-in-out infinite alternate-reverse;
+}
+.glow &gt; * { position: relative; z-index: 1; } /* текст поверх пятен */
+
+@keyframes drift {
+  to { transform: translate(15vmax, 10vmax) scale(1.2); }
+}
+@keyframes drift-back {
+  to { transform: translate(-15vmax, -10vmax) scale(1.2); }
+}
+
+/* у кого в системе выключена анимация — фон стоит на месте */
+@media (prefers-reduced-motion: reduce) {
+  .glow::before, .glow::after { animation: none; }
+}</code></pre></div>
+      <p class="note">Цвета пятен — background у ::before и ::after. Скорость — 6s и 8s: больше — медленнее.</p>
+    </section>
+
+    <footer>
+      <h2>Нужен сайт с такими деталями?</h2>
+      <p>Делаю сайты под ваш бизнес: дизайн, код и запуск. Напишите мне в директ слово «сайт» — расскажу, как сделать ваш.</p>
+      <a class="cta" href="https://instagram.com/rita.akerman">@rita.akerman</a>
+    </footer>
+  </div>
+
+<script>
+  // 01. Магнитная кнопка — тот же код, что в гайде
+  document.querySelectorAll('.magnet-zone').forEach((zone) => {
+    const button = zone.querySelector('.magnet');
+
+    zone.addEventListener('pointermove', (event) => {
+      const box = button.getBoundingClientRect();
+      const x = event.clientX - (box.left + box.width / 2);
+      const y = event.clientY - (box.top + box.height / 2);
+      button.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+    });
+
+    zone.addEventListener('pointerleave', () => {
+      button.style.transform = '';
+    });
+  });
+  document.querySelectorAll('.magnet').forEach((a) => a.addEventListener('click', (e) => e.preventDefault()));
+
+  // 02. Появление при прокрутке — в примере листается окошко, поэтому root указывает на него
+  const box = document.getElementById('reveal-box');
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    }
+  }, { root: box, threshold: 0.2 });
+  box.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+  // кнопки «Скопировать»
+  document.querySelectorAll('.copy').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const text = btn.parentElement.querySelector('code').textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (e) {
+        const area = document.createElement('textarea');
+        area.value = text; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove();
+      }
+      btn.textContent = 'Скопировано'; btn.classList.add('done');
+      setTimeout(() => { btn.textContent = 'Скопировать'; btn.classList.remove('done'); }, 1600);
+    });
+  });
+</script>
+</body>
+</html>
