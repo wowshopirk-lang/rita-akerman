@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="rita akerman">
+<title>Шаблон CLAUDE.md для сайта — гайд rita akerman</title>
+<meta name="description" content="Файл правил, который Claude Code читает в начале каждого чата: готовый шаблон для сайта, что в нём писать и как его создать.">
+<meta property="og:title" content="Шаблон CLAUDE.md для сайта — гайд rita akerman">
+<meta property="og:description" content="Готовый шаблон: проект, дизайн, код, проверка. Копируешь и подставляешь своё.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  :root { --night: #0B0620; --panel: #140C33; --line: rgba(205, 184, 255, 0.22); --lilac: #CDB8FF; --soft: #C9B6FF; --violet: #6F2CFF; --text: #F4F0FF; }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--night); color: var(--text); font: 400 17px/1.55 'Geologica', system-ui, sans-serif; }
+  a { color: var(--lilac); }
+  code { font-family: 'JetBrains Mono', monospace; font-size: 0.92em; color: #EDE6FF; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  header { padding: 28px 0 8px; }
+  .owner { font: 500 14px 'JetBrains Mono', monospace; color: var(--lilac); letter-spacing: 0.04em; text-decoration: none; }
+
+  .hero { position: relative; overflow: hidden; border-radius: 24px; padding: 44px 24px 32px; margin-top: 8px; background: #0B0620; }
+  .hero::before, .hero::after { content: ""; position: absolute; width: 45vmax; height: 45vmax; border-radius: 50%; filter: blur(70px); opacity: 0.8; animation: drift 4s ease-in-out infinite alternate; }
+  .hero::before { background: #6F2CFF; top: -15%; left: -10%; }
+  .hero::after { background: #FF7AC6; bottom: -15%; right: -10%; animation: drift-back 5s ease-in-out infinite alternate-reverse; }
+  .hero > * { position: relative; z-index: 1; }
+  @keyframes drift { to { transform: translate(25vmax, 15vmax) scale(1.15); } }
+  @keyframes drift-back { to { transform: translate(-25vmax, -15vmax) scale(1.15); } }
+  .tag { font: 700 13px 'JetBrains Mono', monospace; color: #fff; letter-spacing: 0.12em; }
+  .hero h1 { font-size: clamp(34px, 7.5vw, 60px); line-height: 1.05; margin: 14px 0 16px; font-weight: 600; }
+  .hero p { color: rgba(255, 255, 255, 0.88); font-size: 19px; margin: 0; max-width: 34em; }
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 0; padding: 0; list-style: none; }
+  .toc a { display: inline-block; padding: 8px 14px; border: 1px solid rgba(255, 255, 255, 0.28); border-radius: 999px; text-decoration: none; font-size: 15px; color: #fff; background: rgba(11, 6, 32, 0.35); }
+
+  section { padding: 40px 0 6px; border-top: 1px solid var(--line); margin-top: 34px; }
+  .num { font: 700 14px 'JetBrains Mono', monospace; color: var(--lilac); }
+  h2 { font-size: clamp(28px, 6vw, 40px); line-height: 1.1; margin: 8px 0 12px; font-weight: 600; }
+  section p, section li { color: var(--soft); }
+  section ul, section ol { padding-left: 22px; margin: 8px 0 14px; }
+  section li { margin: 6px 0; }
+  .note { font-size: 15px; color: rgba(244, 240, 255, 0.72); }
+  .tip { background: rgba(43, 181, 160, 0.12); border: 1px solid rgba(124, 224, 181, 0.35); border-radius: 14px; padding: 12px 16px; margin: 12px 0; color: #DFF7EE; }
+  .tip b { font: 700 12px 'JetBrains Mono', monospace; letter-spacing: 0.1em; color: #7CE0B5; display: block; margin-bottom: 4px; }
+
+  .code { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; margin: 0 0 12px; }
+  .code .file { display: block; padding: 12px 16px 0; font: 700 12px 'JetBrains Mono', monospace; color: rgba(205, 184, 255, 0.7); letter-spacing: 0.08em; }
+  .code pre { margin: 0; padding: 40px 16px 18px; overflow-x: auto; font: 500 13.5px/1.65 'JetBrains Mono', monospace; color: #E9E2FF; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .code .file + pre { padding-top: 22px; }
+  .copy { position: absolute; top: 8px; right: 8px; font: 600 13px 'Geologica', sans-serif; color: #fff; background: var(--violet); border: 0; border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+  .copy.done { background: #2BB5A0; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 8px 0 14px; }
+  td { border-top: 1px solid var(--line); padding: 10px 8px 10px 0; vertical-align: top; color: var(--soft); }
+  td:first-child { white-space: nowrap; color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 14px; }
+
+  footer { margin: 56px 0 0; padding: 40px 0 56px; border-top: 1px solid var(--line); }
+  footer h2 { font-size: 28px; line-height: 1.15; margin: 0 0 10px; }
+  footer p { color: var(--soft); margin: 0 0 18px; }
+  .cta { display: inline-block; padding: 14px 26px; border-radius: 999px; background: var(--violet); color: #fff; text-decoration: none; font-weight: 600; }
+  @media (prefers-reduced-motion: reduce) { .hero::before, .hero::after { animation: none; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="owner" href="https://instagram.com/rita.akerman">rita akerman · @rita.akerman</a></header>
+
+    <div class="hero">
+      <div class="tag">БЕСПЛАТНЫЙ ШАБЛОН</div>
+      <h1>CLAUDE.md для сайта</h1>
+      <p>Каждый новый чат Claude Code начинает с чистого листа. Этот файл он читает первым — и помнит, что за сайт, какие шрифты, цвета и правила. Копируешь шаблон, подставляешь своё.</p>
+      <ul class="toc">
+        <li><a href="#how">Как это работает</a></li>
+        <li><a href="#template">Шаблон</a></li>
+        <li><a href="#tips">Как писать</a></li>
+        <li><a href="#init">Быстрый старт</a></li>
+      </ul>
+    </div>
+
+    <section id="how">
+      <div class="num">01</div>
+      <h2>Как это работает</h2>
+      <p>CLAUDE.md — обычный текстовый файл с правилами. Claude Code загружает его в начале каждого чата, поэтому не нужно каждый раз заново объяснять, как вы делаете сайт.</p>
+      <table>
+        <tr><td>./CLAUDE.md</td><td>в папке сайта — правила этого проекта. Самый нужный.</td></tr>
+        <tr><td>~/.claude/CLAUDE.md</td><td>общий для всех ваших проектов: как вы любите работать.</td></tr>
+        <tr><td>CLAUDE.local.md</td><td>личные заметки к проекту, которые не нужно отдавать другим (добавьте в .gitignore).</td></tr>
+      </table>
+      <p class="note">Это подсказка для Claude, а не жёсткий запрет: чем конкретнее и короче правила, тем точнее он их выполняет.</p>
+    </section>
+
+    <section id="template">
+      <div class="num">02</div>
+      <h2>Шаблон</h2>
+      <p>Скопируйте целиком, сохраните в папке сайта под именем <code>CLAUDE.md</code> и замените примеры на своё. Пример написан для одностраничного сайта студии воздушных шаров.</p>
+      <div class="code"><button class="copy">Скопировать</button><span class="file">CLAUDE.md</span><pre><code># Проект
+Сайт студии воздушных шаров, одна страница.
+Цель — заявки в WhatsApp и через форму.
+Аудитория — невесты и организаторы праздников.
+
+# Дизайн
+Шрифты: Geologica — заголовки, Inter — текст.
+Цвета: фон #FFF8F4, текст #2B1D1A, акцент #E86A92.
+Отступы кратны 8px, контент до 1200px.
+Сначала мобильная версия, от 375px.
+
+# Код
+HTML, CSS и чистый JavaScript, без фреймворков.
+Разметка: header, main, section, footer.
+У картинок alt, размеры и loading="lazy".
+Анимации выключаются при prefers-reduced-motion.
+
+# Проверка
+Перед «готово» открой страницу на 375 и 1440px.
+Проверь форму, ссылки и консоль браузера.
+Не меняй цвета и шрифты без моего согласия.
+Без шаблонных блоков «Feature 1, 2, 3».</code></pre></div>
+      <p class="note">Если сайт на React, Next.js или Tailwind — напишите это в разделе «Код» вместо «чистого JavaScript», и Claude будет держаться вашего стека.</p>
+    </section>
+
+    <section id="tips">
+      <div class="num">03</div>
+      <h2>Как писать, чтобы работало</h2>
+      <ul>
+        <li><b>Числами, а не словами.</b> «Отступы кратны 8px» вместо «аккуратные отступы». «Акцент #E86A92» вместо «розовый».</li>
+        <li><b>Одно правило — одна строка.</b> Без «по возможности» и «желательно».</li>
+        <li><b>Коротко.</b> Держите файл до 200 строк: длинный файл занимает больше места и выполняется хуже.</li>
+        <li><b>Без противоречий.</b> Если два правила спорят, Claude выберет одно наугад. Перечитывайте файл раз в пару недель.</li>
+        <li><b>Запреты тоже правила.</b> «Не меняй цвета без спроса» экономит больше всего нервов.</li>
+      </ul>
+      <div class="tip"><b>СОВЕТ</b>Поправили Claude в чате дважды за одно и то же — допишите это правило в CLAUDE.md, чтобы не повторять в третий раз.</div>
+    </section>
+
+    <section id="init">
+      <div class="num">04</div>
+      <h2>Быстрый старт</h2>
+      <p>Если в папке уже есть код, Claude может сам собрать черновик файла. Откройте Claude Code в папке сайта и введите:</p>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>/init</code></pre></div>
+      <p>Он изучит проект и создаст CLAUDE.md с тем, что нашёл. Если файл уже есть — предложит улучшения, а не перезапишет. После этого допишите разделы «Дизайн» и «Проверка» из шаблона: их Claude сам не угадает.</p>
+      <p class="note">По материалам официальной документации Claude Code (code.claude.com/docs/en/memory).</p>
+    </section>
+
+    <footer>
+      <h2>Нужен сайт целиком?</h2>
+      <p>Делаю сайты под ваш бизнес: дизайн, код и запуск. Напишите мне в директ слово «сайт» — расскажу, как сделать ваш.</p>
+      <a class="cta" href="https://instagram.com/rita.akerman">@rita.akerman</a>
+    </footer>
+  </div>
+<script>
+  document.querySelectorAll('.copy').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const text = btn.parentElement.querySelector('code').textContent;
+      try { await navigator.clipboard.writeText(text); } catch (e) {
+        const area = document.createElement('textarea'); area.value = text; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove();
+      }
+      btn.textContent = 'Скопировано'; btn.classList.add('done');
+      setTimeout(() => { btn.textContent = 'Скопировать'; btn.classList.remove('done'); }, 1600);
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="rita akerman">
+<title>4 плагина Claude Code для сайтов — гайд rita akerman</title>
+<meta name="description" content="Официальные плагины из каталога Anthropic: что делает каждый, команды установки и как проверить, что работает.">
+<meta property="og:title" content="4 плагина Claude Code для сайтов — гайд rita akerman">
+<meta property="og:description" content="Что делает каждый, команды установки и как проверить, что работает.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  :root { --night: #0B0620; --panel: #140C33; --line: rgba(205, 184, 255, 0.22); --lilac: #CDB8FF; --soft: #C9B6FF; --violet: #6F2CFF; --text: #F4F0FF; }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--night); color: var(--text); font: 400 17px/1.55 'Geologica', system-ui, sans-serif; }
+  a { color: var(--lilac); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  header { padding: 28px 0 8px; }
+  .owner { font: 500 14px 'JetBrains Mono', monospace; color: var(--lilac); letter-spacing: 0.04em; text-decoration: none; }
+
+  .hero { position: relative; overflow: hidden; border-radius: 24px; padding: 44px 24px 32px; margin-top: 8px; background: #0B0620; }
+  .hero::before, .hero::after { content: ""; position: absolute; width: 45vmax; height: 45vmax; border-radius: 50%; filter: blur(70px); opacity: 0.8; animation: drift 4s ease-in-out infinite alternate; }
+  .hero::before { background: #6F2CFF; top: -15%; left: -10%; }
+  .hero::after { background: #FF7AC6; bottom: -15%; right: -10%; animation: drift-back 5s ease-in-out infinite alternate-reverse; }
+  .hero > * { position: relative; z-index: 1; }
+  @keyframes drift { to { transform: translate(25vmax, 15vmax) scale(1.15); } }
+  @keyframes drift-back { to { transform: translate(-25vmax, -15vmax) scale(1.15); } }
+  .tag { font: 700 13px 'JetBrains Mono', monospace; color: #fff; letter-spacing: 0.12em; }
+  .hero h1 { font-size: clamp(34px, 7.5vw, 60px); line-height: 1.05; margin: 14px 0 16px; font-weight: 600; }
+  .hero p { color: rgba(255, 255, 255, 0.88); font-size: 19px; margin: 0; max-width: 34em; }
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 0; padding: 0; list-style: none; }
+  .toc a { display: inline-block; padding: 8px 14px; border: 1px solid rgba(255, 255, 255, 0.28); border-radius: 999px; text-decoration: none; font-size: 15px; color: #fff; background: rgba(11, 6, 32, 0.35); }
+
+  section { padding: 40px 0 6px; border-top: 1px solid var(--line); margin-top: 34px; }
+  .num { font: 700 14px 'JetBrains Mono', monospace; color: var(--lilac); }
+  h2 { font-size: clamp(28px, 6vw, 40px); line-height: 1.1; margin: 8px 0 6px; font-weight: 600; }
+  .by { font: 500 14px 'JetBrains Mono', monospace; color: rgba(205, 184, 255, 0.7); margin: 0 0 14px; }
+  section p, section li { color: var(--soft); }
+  section ul, section ol { padding-left: 22px; margin: 8px 0 14px; }
+  section li { margin: 4px 0; }
+  .note { font-size: 15px; color: rgba(244, 240, 255, 0.72); }
+  .ask { background: rgba(111, 44, 255, 0.12); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; margin: 10px 0 14px; color: #EDE6FF; }
+  .ask b { font: 700 12px 'JetBrains Mono', monospace; letter-spacing: 0.1em; color: var(--lilac); display: block; margin-bottom: 4px; }
+  h3 { font: 700 13px 'JetBrains Mono', monospace; letter-spacing: 0.1em; color: var(--lilac); margin: 20px 0 8px; text-transform: uppercase; }
+
+  .code { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; margin: 0 0 12px; }
+  .code pre { margin: 0; padding: 50px 16px 18px; overflow-x: auto; font: 500 13.5px/1.6 'JetBrains Mono', monospace; color: #E9E2FF; }
+  .copy { position: absolute; top: 8px; right: 8px; font: 600 13px 'Geologica', sans-serif; color: #fff; background: var(--violet); border: 0; border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+  .copy.done { background: #2BB5A0; }
+
+  footer { margin: 56px 0 0; padding: 40px 0 56px; border-top: 1px solid var(--line); }
+  footer h2 { font-size: 28px; line-height: 1.15; margin: 0 0 10px; }
+  footer p { color: var(--soft); margin: 0 0 18px; }
+  .cta { display: inline-block; padding: 14px 26px; border-radius: 999px; background: var(--violet); color: #fff; text-decoration: none; font-weight: 600; }
+  @media (prefers-reduced-motion: reduce) { .hero::before, .hero::after { animation: none; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="owner" href="https://instagram.com/rita.akerman">rita akerman · @rita.akerman</a></header>
+
+    <div class="hero">
+      <div class="tag">БЕСПЛАТНЫЙ ГАЙД</div>
+      <h1>4 плагина Claude Code для сайтов</h1>
+      <p>Чтобы сайт, сделанный с ИИ, не выглядел шаблонно и работал как надо. Все плагины — из официального каталога Anthropic: что делает каждый, как поставить одной командой и как проверить, что работает.</p>
+      <ul class="toc">
+        <li><a href="#how">Как ставить</a></li>
+        <li><a href="#frontend-design">01 frontend-design</a></li>
+        <li><a href="#playwright">02 Playwright</a></li>
+        <li><a href="#context7">03 Context7</a></li>
+        <li><a href="#security-guidance">04 security-guidance</a></li>
+      </ul>
+    </div>
+
+    <section id="how">
+      <div class="num">00</div>
+      <h2>Как ставить</h2>
+      <p><b>В терминале.</b> Откройте Claude Code в папке сайта (команда <code>claude</code>) и вставьте команду плагина из гайда. Откроется карточка плагина — выберите <b>Install for you</b>, тогда он будет во всех ваших проектах.</p>
+      <p><b>В приложении Claude</b> (вкладка Code): кнопка <b>+</b> рядом с полем ввода → <b>Plugins</b> → <b>Add plugin</b> → найдите плагин по названию.</p>
+      <p><b>Проверить:</b> команда <code>/plugin</code> → вкладка <b>Installed</b>. Там же плагин можно выключить или удалить.</p>
+      <p class="note">Каталог <code>claude-plugins-official</code> подключён в Claude Code сразу, добавлять его не нужно.</p>
+    </section>
+
+    <section id="frontend-design">
+      <div class="num">01 / 04</div>
+      <h2>frontend-design</h2>
+      <p class="by">от Anthropic</p>
+      <p>Когда вы просите сделать страницу, Claude сам подключает этот навык: выбирает чёткое направление дизайна — шрифты, палитру, анимации — и уходит от шаблонного «нейронного» вида с одинаковыми градиентами.</p>
+      <div class="ask"><b>ПРИМЕР ЗАПРОСА</b>Сделай лендинг для пекарни: тёплый, с крупной типографикой и кнопкой «Заказать к 8:00».</div>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>/plugin install frontend-design@claude-plugins-official</code></pre></div>
+    </section>
+
+    <section id="playwright">
+      <div class="num">02 / 04</div>
+      <h2>Playwright</h2>
+      <p class="by">от Microsoft</p>
+      <p>Даёт Claude браузер. Он сам открывает страницы, кликает, заполняет формы и делает скриншоты, то есть видит, что получилось, а не угадывает по коду.</p>
+      <div class="ask"><b>ПРИМЕР ЗАПРОСА</b>Открой сайт в браузере, заполни форму записи, проверь, что заявка уходит, и пришли скриншот в ширине телефона.</div>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>/plugin install playwright@claude-plugins-official</code></pre></div>
+      <p class="note">Нужен Node.js: плагин запускается через npx. Если его нет — скачайте версию LTS с nodejs.org.</p>
+    </section>
+
+    <section id="context7">
+      <div class="num">03 / 04</div>
+      <h2>Context7</h2>
+      <p class="by">от Upstash</p>
+      <p>Подтягивает свежую документацию библиотек нужной версии прямо в запрос. Без него Claude может написать по устаревшим примерам: например, подключить Tailwind CSS строками третьей версии, когда стоит уже четвёртая.</p>
+      <div class="ask"><b>ПРИМЕР ЗАПРОСА</b>Подключи Tailwind CSS последней версии, сверься с документацией через Context7.</div>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>/plugin install context7@claude-plugins-official</code></pre></div>
+      <p class="note">Работает без ключа. Если упрётесь в лимит запросов — ключ можно получить на context7.com и задать переменной CONTEXT7_API_KEY.</p>
+    </section>
+
+    <section id="security-guidance">
+      <div class="num">04 / 04</div>
+      <h2>security-guidance</h2>
+      <p class="by">от Anthropic</p>
+      <p>Проверяет код, который пишет Claude, на дыры. Работает в три слоя:</p>
+      <ol>
+        <li>предупреждает прямо во время правок — около 25 опасных приёмов, например текст пользователя в innerHTML или ключ прямо в коде;</li>
+        <li>в конце каждого ответа разбирает изменения и просит Claude исправить серьёзное;</li>
+        <li>при git commit проверяет связи между файлами.</li>
+      </ol>
+      <p>Ловит инъекции, XSS, SSRF, ключи в коде, обход авторизации и другое.</p>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>/plugin install security-guidance@claude-plugins-official</code></pre></div>
+      <p class="note">Разбор идёт на модели Opus и расходует лимиты. Модель можно сменить переменной SECURITY_REVIEW_MODEL. Нужен Python 3.8+ и Claude Code версии 2.1.144 или новее.</p>
+    </section>
+
+    <section id="bonus">
+      <div class="num">БОНУС</div>
+      <h2>claude-code-setup</h2>
+      <p class="by">от Anthropic</p>
+      <p>Изучает ваш проект и подсказывает, что ещё стоит подключить: хуки, навыки, MCP-серверы.</p>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>/plugin install claude-code-setup@claude-plugins-official</code></pre></div>
+      <h3>Важно</h3>
+      <ul>
+        <li>Плагины запускают свой код, поэтому ставьте их из официального каталога.</li>
+        <li>Каждый включённый плагин добавляет немного к каждому запросу. Ненужные выключайте в <code>/plugin</code> → Installed.</li>
+      </ul>
+    </section>
+
+    <footer>
+      <h2>Нужен сайт, а не плагины?</h2>
+      <p>Делаю сайты под ваш бизнес: дизайн, код и запуск. Напишите мне в директ слово «сайт» — расскажу, как сделать ваш.</p>
+      <a class="cta" href="https://instagram.com/rita.akerman">@rita.akerman</a>
+    </footer>
+  </div>
+<script>
+  document.querySelectorAll('.copy').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const text = btn.parentElement.querySelector('code').textContent;
+      try { await navigator.clipboard.writeText(text); } catch (e) {
+        const area = document.createElement('textarea'); area.value = text; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove();
+      }
+      btn.textContent = 'Скопировано'; btn.classList.add('done');
+      setTimeout(() => { btn.textContent = 'Скопировать'; btn.classList.remove('done'); }, 1600);
+    });
+  });
+</script>
+</body>
+</html>
