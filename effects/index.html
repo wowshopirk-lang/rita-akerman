@@ -113,25 +113,25 @@
   .glow::after {
     content: "";
     position: absolute;
-    width: 60vmax;
-    height: 60vmax;
+    width: 45vmax;
+    height: 45vmax;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.75;
-    animation: drift 6s ease-in-out infinite alternate;
+    filter: blur(70px);
+    opacity: 0.8;
+    animation: drift 4s ease-in-out infinite alternate;
   }
-  .glow::before { background: #6F2CFF; top: -20%; left: -10%; }
+  .glow::before { background: #6F2CFF; top: -15%; left: -10%; }
   .glow::after {
-    background: #FF7AC6; bottom: -25%; right: -15%;
-    animation: drift-back 8s ease-in-out infinite alternate-reverse;
+    background: #FF7AC6; bottom: -15%; right: -10%;
+    animation: drift-back 5s ease-in-out infinite alternate-reverse;
   }
   .glow > * { position: relative; z-index: 1; }
 
   @keyframes drift {
-    to { transform: translate(15vmax, 10vmax) scale(1.2); }
+    to { transform: translate(25vmax, 15vmax) scale(1.15); }
   }
   @keyframes drift-back {
-    to { transform: translate(-15vmax, -10vmax) scale(1.2); }
+    to { transform: translate(-25vmax, -15vmax) scale(1.15); }
   }
 
   .demo-glow { min-height: 320px; }
@@ -273,7 +273,7 @@ document.querySelectorAll('.reveal').forEach((el) =&gt; observer.observe(el));</
     <section class="fx" id="glow">
       <div class="num">03 / 03</div>
       <h2>Живой фон</h2>
-      <p>Два мягких пятна цвета медленно плывут за текстом. Только CSS: ни картинок, ни видео, страница не тяжелеет.</p>
+      <p>Два мягких пятна цвета плывут за текстом, а сам текст стоит на месте. Только CSS: ни картинок, ни видео, страница не тяжелеет.</p>
       <div class="demo glow demo-glow">
         <div><small>WEB DESIGNER · IT CREATOR</small><strong>rita akerman</strong></div>
       </div>
@@ -293,32 +293,32 @@ document.querySelectorAll('.reveal').forEach((el) =&gt; observer.observe(el));</
 .glow::after {
   content: "";
   position: absolute;
-  width: 60vmax;
-  height: 60vmax;
+  width: 45vmax;
+  height: 45vmax;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.75;
-  animation: drift 6s ease-in-out infinite alternate;
+  filter: blur(70px);
+  opacity: 0.8;
+  animation: drift 4s ease-in-out infinite alternate;
 }
-.glow::before { background: #6F2CFF; top: -20%; left: -10%; }
+.glow::before { background: #6F2CFF; top: -15%; left: -10%; }
 .glow::after {
-  background: #FF7AC6; bottom: -25%; right: -15%;
-  animation: drift-back 8s ease-in-out infinite alternate-reverse;
+  background: #FF7AC6; bottom: -15%; right: -10%;
+  animation: drift-back 5s ease-in-out infinite alternate-reverse;
 }
 .glow &gt; * { position: relative; z-index: 1; } /* текст поверх пятен */
 
 @keyframes drift {
-  to { transform: translate(15vmax, 10vmax) scale(1.2); }
+  to { transform: translate(25vmax, 15vmax) scale(1.15); }
 }
 @keyframes drift-back {
-  to { transform: translate(-15vmax, -10vmax) scale(1.2); }
+  to { transform: translate(-25vmax, -15vmax) scale(1.15); }
 }
 
 /* у кого в системе выключена анимация — фон стоит на месте */
 @media (prefers-reduced-motion: reduce) {
   .glow::before, .glow::after { animation: none; }
 }</code></pre></div>
-      <p class="note">Цвета пятен — background у ::before и ::after. Скорость — 6s и 8s: больше — медленнее.</p>
+      <p class="note">Цвета пятен — background у ::before и ::after. Скорость — 4s и 5s: больше — медленнее. Размер пятен — 45vmax.</p>
     </section>
 
     <footer>
