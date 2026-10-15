@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="rita akerman">
+<title>5 дыр в сайте, сделанном с ИИ — чек-лист rita akerman</title>
+<meta name="description" content="Как за минуту проверить сайт, сделанный с ИИ, на пять опасных дыр и как их закрыть. Плюс готовый промпт-проверка для Claude Code.">
+<meta property="og:title" content="5 дыр в сайте, сделанном с ИИ — чек-лист rita akerman">
+<meta property="og:description" content="Проверка за минуту, как закрыть и промпт-проверка для Claude Code.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  :root { --night: #0B0620; --panel: #140C33; --line: rgba(205, 184, 255, 0.22); --lilac: #CDB8FF; --soft: #C9B6FF; --violet: #6F2CFF; --text: #F4F0FF; --red: #FF8FA8; }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--night); color: var(--text); font: 400 17px/1.55 'Geologica', system-ui, sans-serif; }
+  a { color: var(--lilac); }
+  code { font-family: 'JetBrains Mono', monospace; font-size: 0.92em; color: #EDE6FF; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  header { padding: 28px 0 8px; }
+  .owner { font: 500 14px 'JetBrains Mono', monospace; color: var(--lilac); letter-spacing: 0.04em; text-decoration: none; }
+
+  .hero { position: relative; overflow: hidden; border-radius: 24px; padding: 44px 24px 32px; margin-top: 8px; background: #0B0620; }
+  .hero::before, .hero::after { content: ""; position: absolute; width: 45vmax; height: 45vmax; border-radius: 50%; filter: blur(70px); opacity: 0.8; animation: drift 4s ease-in-out infinite alternate; }
+  .hero::before { background: #6F2CFF; top: -15%; left: -10%; }
+  .hero::after { background: #E5486B; bottom: -15%; right: -10%; animation: drift-back 5s ease-in-out infinite alternate-reverse; }
+  .hero > * { position: relative; z-index: 1; }
+  @keyframes drift { to { transform: translate(25vmax, 15vmax) scale(1.15); } }
+  @keyframes drift-back { to { transform: translate(-25vmax, -15vmax) scale(1.15); } }
+  .tag { font: 700 13px 'JetBrains Mono', monospace; color: #fff; letter-spacing: 0.12em; }
+  .hero h1 { font-size: clamp(34px, 7.5vw, 60px); line-height: 1.05; margin: 14px 0 16px; font-weight: 600; }
+  .hero p { color: rgba(255, 255, 255, 0.9); font-size: 19px; margin: 0; max-width: 34em; }
+  .stat { display: flex; gap: 18px; align-items: baseline; margin: 22px 0 0; }
+  .stat b { font-size: 56px; line-height: 1; color: #fff; }
+  .stat span { color: rgba(255, 255, 255, 0.85); font-size: 16px; max-width: 22em; }
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 0; padding: 0; list-style: none; }
+  .toc a { display: inline-block; padding: 8px 14px; border: 1px solid rgba(255, 255, 255, 0.28); border-radius: 999px; text-decoration: none; font-size: 15px; color: #fff; background: rgba(11, 6, 32, 0.35); }
+
+  section { padding: 40px 0 6px; border-top: 1px solid var(--line); margin-top: 34px; }
+  .num { font: 700 14px 'JetBrains Mono', monospace; color: var(--red); }
+  h2 { font-size: clamp(28px, 6vw, 40px); line-height: 1.1; margin: 8px 0 12px; font-weight: 600; }
+  h3 { font: 700 13px 'JetBrains Mono', monospace; letter-spacing: 0.1em; color: var(--lilac); margin: 20px 0 8px; text-transform: uppercase; }
+  section p, section li { color: var(--soft); }
+  section ul, section ol { padding-left: 22px; margin: 8px 0 14px; }
+  section li { margin: 6px 0; }
+  .note { font-size: 15px; color: rgba(244, 240, 255, 0.72); }
+  .danger { background: rgba(229, 72, 107, 0.12); border: 1px solid rgba(255, 143, 168, 0.4); border-radius: 14px; padding: 12px 16px; margin: 8px 0 12px; color: #FFE1E8; }
+
+  .code { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; margin: 0 0 12px; }
+  .code pre { margin: 0; padding: 50px 16px 18px; overflow-x: auto; font: 500 13.5px/1.6 'JetBrains Mono', monospace; color: #E9E2FF; }
+  .code.wrapText pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .copy { position: absolute; top: 8px; right: 8px; font: 600 13px 'Geologica', sans-serif; color: #fff; background: var(--violet); border: 0; border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+  .copy.done { background: #2BB5A0; }
+
+  footer { margin: 56px 0 0; padding: 40px 0 56px; border-top: 1px solid var(--line); }
+  footer h2 { font-size: 28px; line-height: 1.15; margin: 0 0 10px; }
+  footer p { color: var(--soft); margin: 0 0 18px; }
+  .cta { display: inline-block; padding: 14px 26px; border-radius: 999px; background: var(--violet); color: #fff; text-decoration: none; font-weight: 600; }
+  .src { font-size: 14px; color: rgba(244, 240, 255, 0.6); }
+  .src a { color: rgba(205, 184, 255, 0.8); }
+  @media (prefers-reduced-motion: reduce) { .hero::before, .hero::after { animation: none; } }
+  @media (max-width: 560px) { .stat { flex-direction: column; gap: 6px; } .stat span { max-width: none; } }
+
+
+
+  /* media: live hero and photos (add_media.py) */
+  .hero.live { padding-top: calc(min(62vh, 600px) + 8px); }
+  .hero.live::before, .hero.live::after { opacity: 0.16; }
+  .hero .bg { position: absolute; top: 0; left: 0; width: 100%; height: min(62vh, 600px); object-fit: cover; z-index: 0; }
+  .hero .shade { position: absolute; top: 0; left: 0; width: 100%; height: min(62vh, 600px); z-index: 0; background: linear-gradient(180deg, rgba(11,6,32,0) 55%, #0B0620 100%); }
+  .hero .rec { position: absolute; top: 18px; left: 22px; right: 22px; z-index: 1; display: flex; justify-content: space-between; font: 700 12px 'JetBrains Mono', monospace; letter-spacing: 0.12em; color: rgba(255,255,255,0.85); }
+  .shot { position: relative; margin: 30px 0 6px; }
+  .shot img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 18px; }
+  .shot::before, .shot::after { content: ""; position: absolute; width: 26px; height: 26px; border: 2px solid var(--lilac); }
+  .shot::before { top: -8px; left: -8px; border-right: 0; border-bottom: 0; }
+  .shot::after { bottom: 34px; right: -8px; border-left: 0; border-top: 0; }
+  .shot figcaption { font: 500 13px 'JetBrains Mono', monospace; color: var(--lilac); margin-top: 10px; letter-spacing: 0.03em; }
+  @media (min-width: 760px) { .shot img { aspect-ratio: 16 / 10; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="owner" href="https://instagram.com/rita.akerman">rita akerman · @rita.akerman</a></header>
+
+    <div class="hero live">
+<video class="bg" src="media/hero.mp4" poster="media/hero.jpg" autoplay muted loop playsinline></video><div class="shade"></div><div class="rec"><span>● REC</span><span>RITA@SITE</span></div>
+
+
+
+      <div class="tag">БЕСПЛАТНЫЙ ЧЕК-ЛИСТ</div>
+      <h1>5 дыр в сайте, сделанном с ИИ</h1>
+      <p>ИИ пишет код, который работает, но часто пропускает защиту. Вот пять самых опасных дыр: как проверить каждую за минуту и как закрыть. В конце — готовый промпт, чтобы Claude Code сам проверил ваш проект.</p>
+      <div class="stat"><b>98%</b><span>из 1 072 проверенных сайтов, сделанных с ИИ, — хотя бы с одной дырой (Symbiotic Security, июнь 2026)</span></div>
+      <ul class="toc">
+        <li><a href="#keys">01 Ключи в коде</a></li>
+        <li><a href="#rls">02 База без защиты</a></li>
+        <li><a href="#env">03 Пароли в GitHub</a></li>
+        <li><a href="#xss">04 Чужой скрипт</a></li>
+        <li><a href="#bots">05 Боты в форме</a></li>
+        <li><a href="#prompt">Промпт-проверка</a></li>
+      </ul>
+    </div>
+
+    <section id="keys">
+      <div class="num">01 / 05</div>
+      <h2>Ключи в коде страницы</h2>
+      <div class="danger">Всё, что лежит в JavaScript страницы, видит любой посетитель. Токен Telegram-бота в коде формы — значит, кто угодно сможет писать от имени вашего бота. Платный API-ключ — тратить ваши деньги.</div>
+      <h3>Проверка за минуту</h3>
+      <p>Откройте свой сайт → F12 → нажмите Ctrl+Shift+F (поиск по всем файлам) и поищите <code>token</code>, <code>key</code>, <code>secret</code>, <code>sk_</code>. Нашли настоящий ключ — это дыра.</p>
+      <h3>Как закрыть</h3>
+      <p>Страница отправляет заявку на свою серверную функцию, а ключ живёт только на сервере, в переменных окружения. Пример функции для Vercel:</p>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>// api/lead.js — выполняется на сервере, ключа в браузере нет
+export default async function handler(req, res) {
+  const { name, phone } = req.body;
+  await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: process.env.TELEGRAM_CHAT_ID, text: `Заявка: ${name}, ${phone}` }),
+  });
+  res.status(200).json({ ok: true });
+}</code></pre></div>
+      <p class="note">Если ключ уже утёк — отзовите его и выпустите новый. Для Telegram-бота: команда <code>/revoke</code> в @BotFather.</p>
+    </section>
+<figure class="shot"><img src="media/shot-1.jpg" alt="" loading="lazy"><figcaption>Ключ в коде виден любому, кто откроет страницу</figcaption></figure>
+
+    <section id="rls">
+      <div class="num">02 / 05</div>
+      <h2>База без защиты</h2>
+      <div class="danger">Публичный ключ Supabase в браузере — это нормально, но только если у таблиц включён Row Level Security. Без него база — открытая дверь: в исследовании у 172 сайтов из 1 072 любой мог удалять данные без входа.</div>
+      <h3>Проверка за минуту</h3>
+      <p>Supabase → ваш проект → Table Editor: у каждой таблицы с данными должно быть включено RLS, а в разделе Policies — правила на чтение, добавление, изменение и удаление.</p>
+      <h3>Как закрыть</h3>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>-- включить защиту таблицы
+alter table orders enable row level security;
+
+-- пример правила: человек видит только свои заказы
+create policy "свои заказы" on orders
+  for select using (auth.uid() = user_id);</code></pre></div>
+      <p class="note">И никогда не кладите ключ <code>service_role</code> в код страницы: он обходит все правила.</p>
+    </section>
+
+    <section id="env">
+      <div class="num">03 / 05</div>
+      <h2>Пароли в GitHub</h2>
+      <div class="danger">Файл <code>.env</code> с ключами уезжает в репозиторий вместе с кодом. Даже если потом его удалить, он остаётся в истории коммитов.</div>
+      <h3>Проверка за минуту</h3>
+      <p>Откройте репозиторий на GitHub и поищите <code>.env</code>. Или в терминале, в папке проекта:</p>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>git log --all -- .env</code></pre></div>
+      <p>Если команда что-то вывела — файл когда-то был в истории.</p>
+      <h3>Как закрыть</h3>
+      <p>Добавьте в файл <code>.gitignore</code>:</p>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>.env
+.env.*</code></pre></div>
+      <p class="note">Все ключи, которые хоть раз попали в репозиторий, считайте утёкшими и замените на новые. Находить ключи в коде умеет, например, бесплатный инструмент Gitleaks.</p>
+    </section>
+<figure class="shot"><img src="media/shot-2.jpg" alt="" loading="lazy"><figcaption>Проверка занимает минуту — дольше искать, где она</figcaption></figure>
+
+    <section id="xss">
+      <div class="num">04 / 05</div>
+      <h2>Чужой скрипт на сайте</h2>
+      <div class="danger">Если текст из формы (отзыв, имя, комментарий) вставляется на страницу через <code>innerHTML</code>, в нём может прийти код, и он выполнится у всех посетителей. Это называется XSS.</div>
+      <h3>Проверка за минуту</h3>
+      <p>Поищите в коде <code>innerHTML</code>, <code>insertAdjacentHTML</code> и <code>dangerouslySetInnerHTML</code> рядом с данными от пользователя.</p>
+      <h3>Как закрыть</h3>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>// текст остаётся текстом, код не выполнится
+review.textContent = form.text.value;</code></pre></div>
+      <p class="note">Если HTML действительно нужен — сначала очистите его, например библиотекой DOMPurify: <code>DOMPurify.sanitize(html)</code>.</p>
+    </section>
+
+    <section id="bots">
+      <div class="num">05 / 05</div>
+      <h2>Форма без защиты от ботов</h2>
+      <div class="danger">Боты отправляют сотни заявок в минуту: спам в Telegram и почту, а у платных сервисов отправки — счёт.</div>
+      <h3>Как закрыть</h3>
+      <p><b>1. Скрытое поле-ловушка.</b> Человек его не видит, бот заполняет:</p>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>&lt;input type="text" name="company" tabindex="-1" autocomplete="off"
+       style="position:absolute; left:-9999px" aria-hidden="true"&gt;</code></pre></div>
+      <p>На сервере заявку с заполненной ловушкой просто пропускаем:</p>
+      <div class="code"><button class="copy">Скопировать</button><pre><code>if (req.body.company) return res.status(200).json({ ok: true }); // это бот</code></pre></div>
+      <p><b>2. Ограничение частоты</b> на сервере: не больше нескольких заявок с одного адреса за минуту.</p>
+      <p><b>3. Капча</b>, если спама всё равно много, — например, Cloudflare Turnstile.</p>
+    </section>
+<figure class="shot"><img src="media/shot-3.jpg" alt="" loading="lazy"><figcaption>Боты не спят: форму без защиты найдут за ночь</figcaption></figure>
+
+    <section id="prompt">
+      <div class="num">БОНУС</div>
+      <h2>Промпт-проверка для Claude Code</h2>
+      <p>Откройте Claude Code в папке сайта и вставьте:</p>
+      <div class="code wrapText"><button class="copy">Скопировать</button><pre><code>Проверь этот проект на 5 проблем безопасности. Для каждой ответь: есть или нет, где именно (файл и строка) и как исправить.
+1. Секретные ключи и токены в коде, который уходит в браузер: API-ключи, токен Telegram-бота, ключ service_role Supabase.
+2. Таблицы базы данных без Row Level Security или без правил на чтение, добавление, изменение и удаление.
+3. Файлы .env и другие секреты, попавшие в git, в том числе в историю коммитов.
+4. Вывод текста от пользователя через innerHTML, insertAdjacentHTML или dangerouslySetInnerHTML без очистки.
+5. Формы и API без защиты от спама: нет ограничения частоты, капчи или скрытого поля-ловушки.
+Ничего не меняй, пока я не подтвержу план исправлений.</code></pre></div>
+      <p class="note">Проверка помогает найти очевидное, но не заменяет аудит. Если сайт принимает деньги или хранит личные данные — покажите его специалисту.</p>
+      <p class="src">Источники: <a href="https://www.symbioticsec.ai/blog/we-scanned-1-072-vibe-coded-apps-98-had-security-flaws">Symbiotic Security, июнь 2026</a> · <a href="https://securitybrief.co.uk/story/moltbook-vibe-coded-flaw-exposed-ai-chats-keys">случай Moltbook, февраль 2026</a> · документация Supabase о Row Level Security.</p>
+    </section>
+
+    <footer>
+      <h2>Нужен сайт, который проверен до запуска?</h2>
+      <p>Делаю сайты под ваш бизнес: дизайн, код, защита и запуск. Напишите мне в директ слово «сайт» — расскажу, как сделать ваш.</p>
+      <a class="cta" href="https://instagram.com/rita.akerman">@rita.akerman</a>
+    </footer>
+  </div>
+<script>
+  document.querySelectorAll('.copy').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const text = btn.parentElement.querySelector('code').textContent;
+      try { await navigator.clipboard.writeText(text); } catch (e) {
+        const area = document.createElement('textarea'); area.value = text; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove();
+      }
+      btn.textContent = 'Скопировано'; btn.classList.add('done');
+      setTimeout(() => { btn.textContent = 'Скопировать'; btn.classList.remove('done'); }, 1600);
+    });
+  });
+</script>
+</body>
+</html>

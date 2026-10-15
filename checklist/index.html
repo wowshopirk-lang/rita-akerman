@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="rita akerman">
+<title>Сайт за вечер: 6 проверок — гайд rita akerman</title>
+<meta name="description" content="ИИ быстро собирает сайт, но забывает мелочи, по которым его встречают. 6 проверок перед тем, как показать сайт людям.">
+<meta property="og:title" content="Сайт за вечер: 6 проверок — гайд rita akerman">
+<meta property="og:description" content="ИИ быстро собирает сайт, но забывает мелочи, по которым его встречают. 6 проверок перед тем, как показать сайт людям.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  :root { --night: #0B0620; --panel: #140C33; --line: rgba(205, 184, 255, 0.22); --lilac: #CDB8FF; --soft: #C9B6FF; --violet: #6F2CFF; --text: #F4F0FF; }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--night); color: var(--text); font: 400 17px/1.55 'Geologica', system-ui, sans-serif; }
+  a { color: var(--lilac); }
+  code { font-family: 'JetBrains Mono', monospace; font-size: 0.92em; color: #EDE6FF; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  header { padding: 28px 0 8px; }
+  .owner { font: 500 14px 'JetBrains Mono', monospace; color: var(--lilac); letter-spacing: 0.04em; text-decoration: none; }
+  .hero { position: relative; overflow: hidden; border-radius: 24px; padding: 44px 24px 32px; margin-top: 8px; background: #0B0620; }
+  .hero::before, .hero::after { content: ""; position: absolute; width: 45vmax; height: 45vmax; border-radius: 50%; filter: blur(70px); opacity: 0.8; animation: drift 4s ease-in-out infinite alternate; }
+  .hero::before { background: #6F2CFF; top: -15%; left: -10%; }
+  .hero::after { background: var(--accent, #FF7AC6); bottom: -15%; right: -10%; animation: drift-back 5s ease-in-out infinite alternate-reverse; }
+  .hero > * { position: relative; z-index: 1; }
+  @keyframes drift { to { transform: translate(25vmax, 15vmax) scale(1.15); } }
+  @keyframes drift-back { to { transform: translate(-25vmax, -15vmax) scale(1.15); } }
+  .tag { font: 700 13px 'JetBrains Mono', monospace; color: #fff; letter-spacing: 0.12em; }
+  .hero h1 { font-size: clamp(34px, 7.5vw, 60px); line-height: 1.05; margin: 14px 0 16px; font-weight: 600; }
+  .hero p { color: rgba(255, 255, 255, 0.9); font-size: 19px; margin: 0; max-width: 34em; }
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 0; padding: 0; list-style: none; }
+  .toc a { display: inline-block; padding: 8px 14px; border: 1px solid rgba(255, 255, 255, 0.28); border-radius: 999px; text-decoration: none; font-size: 15px; color: #fff; background: rgba(11, 6, 32, 0.35); }
+  section { padding: 40px 0 6px; border-top: 1px solid var(--line); margin-top: 34px; }
+  .num { font: 700 14px 'JetBrains Mono', monospace; color: var(--lilac); }
+  h2 { font-size: clamp(28px, 6vw, 40px); line-height: 1.1; margin: 8px 0 6px; font-weight: 600; }
+  .en { font: 500 15px 'JetBrains Mono', monospace; color: rgba(205, 184, 255, 0.75); margin: 0 0 12px; }
+  h3 { font: 700 13px 'JetBrains Mono', monospace; letter-spacing: 0.1em; color: var(--lilac); margin: 20px 0 8px; text-transform: uppercase; }
+  section p, section li { color: var(--soft); }
+  section ul, section ol { padding-left: 22px; margin: 8px 0 14px; }
+  section li { margin: 6px 0; }
+  .note { font-size: 15px; color: rgba(244, 240, 255, 0.72); }
+  .ex { background: rgba(111, 44, 255, 0.12); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; margin: 10px 0 14px; color: #EDE6FF; }
+  .ex b { font: 700 12px 'JetBrains Mono', monospace; letter-spacing: 0.1em; color: var(--lilac); display: block; margin-bottom: 4px; }
+  .bad { background: rgba(229, 72, 107, 0.12); border: 1px solid rgba(255, 143, 168, 0.4); border-radius: 14px; padding: 12px 16px; margin: 10px 0; color: #FFE1E8; }
+  .good { background: rgba(43, 181, 160, 0.12); border: 1px solid rgba(124, 224, 181, 0.4); border-radius: 14px; padding: 12px 16px; margin: 10px 0; color: #DFF7EE; }
+  .code { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; margin: 0 0 12px; }
+  .code pre { margin: 0; padding: 50px 16px 18px; overflow-x: auto; font: 500 13.5px/1.6 'JetBrains Mono', monospace; color: #E9E2FF; }
+  .code.text pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .copy { position: absolute; top: 8px; right: 8px; font: 600 13px 'Geologica', sans-serif; color: #fff; background: var(--violet); border: 0; border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+  .copy.done { background: #2BB5A0; }
+  .demo { display: grid; place-items: center; min-height: 160px; border: 1px solid var(--line); border-radius: 18px; background: #0E0828; margin: 8px 0 14px; padding: 24px; }
+  footer { margin: 56px 0 0; padding: 40px 0 56px; border-top: 1px solid var(--line); }
+  footer h2 { font-size: 28px; line-height: 1.15; margin: 0 0 10px; }
+  footer p { color: var(--soft); margin: 0 0 18px; }
+  .cta { display: inline-block; padding: 14px 26px; border-radius: 999px; background: var(--violet); color: #fff; text-decoration: none; font-weight: 600; }
+  .src { font-size: 14px; color: rgba(244, 240, 255, 0.6); }
+  @media (prefers-reduced-motion: reduce) { .hero::before, .hero::after { animation: none; } }
+
+
+
+  /* media: live hero and photos (add_media.py) */
+  .hero.live { padding-top: calc(min(62vh, 600px) + 8px); }
+  .hero.live::before, .hero.live::after { opacity: 0.16; }
+  .hero .bg { position: absolute; top: 0; left: 0; width: 100%; height: min(62vh, 600px); object-fit: cover; z-index: 0; }
+  .hero .shade { position: absolute; top: 0; left: 0; width: 100%; height: min(62vh, 600px); z-index: 0; background: linear-gradient(180deg, rgba(11,6,32,0) 55%, #0B0620 100%); }
+  .hero .rec { position: absolute; top: 18px; left: 22px; right: 22px; z-index: 1; display: flex; justify-content: space-between; font: 700 12px 'JetBrains Mono', monospace; letter-spacing: 0.12em; color: rgba(255,255,255,0.85); }
+  .shot { position: relative; margin: 30px 0 6px; }
+  .shot img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 18px; }
+  .shot::before, .shot::after { content: ""; position: absolute; width: 26px; height: 26px; border: 2px solid var(--lilac); }
+  .shot::before { top: -8px; left: -8px; border-right: 0; border-bottom: 0; }
+  .shot::after { bottom: 34px; right: -8px; border-left: 0; border-top: 0; }
+  .shot figcaption { font: 500 13px 'JetBrains Mono', monospace; color: var(--lilac); margin-top: 10px; letter-spacing: 0.03em; }
+  @media (min-width: 760px) { .shot img { aspect-ratio: 16 / 10; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="owner" href="https://instagram.com/rita.akerman">rita akerman · @rita.akerman</a></header>
+    <div class="hero live">
+<video class="bg" src="media/hero.mp4" poster="media/hero.jpg" autoplay muted loop playsinline></video><div class="shade"></div><div class="rec"><span>● REC</span><span>RITA@SITE</span></div>
+
+
+
+      <div class="tag">БЕСПЛАТНЫЙ ЧЕК-ЛИСТ</div>
+      <h1>Сайт за вечер: 6 проверок</h1>
+      <p>ИИ быстро собирает сайт, но забывает мелочи, по которым его встречают. 6 проверок перед тем, как показать сайт людям.</p>
+      <ul class="toc"><li><a href="#c1">превью ссылки</a></li><li><a href="#c2">иконка вкладки</a></li><li><a href="#c3">название в поиске</a></li><li><a href="#c4">вид на телефоне</a></li><li><a href="#c5">вес картинок</a></li><li><a href="#c6">согласие на данные</a></li></ul>
+    </div>
+    <section id="c1">
+      <div class="num">01 / 06</div>
+      <h2>Превью ссылки</h2>
+      <div class="bad">Без тегов Open Graph ссылка в мессенджере приходит голой: без картинки и названия.</div>
+      <h3>Проверка за минуту</h3>
+      <p>Отправьте ссылку себе в Telegram.</p>
+      <h3>Как исправить</h3>
+<div class="code"><button class="copy">Скопировать</button><pre><code>&lt;meta property=&quot;og:title&quot; content=&quot;Арки из шаров к празднику&quot;&gt;
+&lt;meta property=&quot;og:description&quot; content=&quot;Соберём арку к вашему празднику за день&quot;&gt;
+&lt;meta property=&quot;og:image&quot; content=&quot;https://moi-sait.ru/og.jpg&quot;&gt;</code></pre></div>
+      <p class="note">Картинка — 1200×630, ссылка на неё полная, с https.</p>
+    </section>
+    <section id="c2">
+      <div class="num">02 / 06</div>
+      <h2>Иконка вкладки</h2>
+      <div class="bad">Без favicon во вкладке браузера серый глобус, а в закладках — пустой квадрат.</div>
+      <h3>Проверка за минуту</h3>
+      <p>Откройте сайт и посмотрите на вкладку.</p>
+      <h3>Как исправить</h3>
+<div class="code"><button class="copy">Скопировать</button><pre><code>&lt;link rel=&quot;icon&quot; href=&quot;/favicon.svg&quot; type=&quot;image/svg+xml&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; href=&quot;/apple-touch-icon.png&quot;&gt;</code></pre></div>
+      <p class="note">apple-touch-icon — PNG 180×180, для iPhone.</p>
+    </section>
+<figure class="shot"><img src="media/shot-1.jpg" alt="" loading="lazy"><figcaption>Сайт за вечер — реально, если не забыть эти шесть вещей</figcaption></figure>
+    <section id="c3">
+      <div class="num">03 / 06</div>
+      <h2>Название в поиске</h2>
+      <div class="bad">ИИ часто оставляет title «Document» и не пишет описание — так сайт и выглядит в поиске.</div>
+      <h3>Проверка за минуту</h3>
+      <p>Наведите на вкладку: что написано?</p>
+      <h3>Как исправить</h3>
+<div class="code"><button class="copy">Скопировать</button><pre><code>&lt;title&gt;Арки из шаров в Казани — студия шаров&lt;/title&gt;
+&lt;meta name=&quot;description&quot; content=&quot;Арки и композиции из шаров к свадьбе и празднику. Доставка и монтаж за день.&quot;&gt;</code></pre></div>
+      <p class="note">Title — до 60 знаков, description — до 160.</p>
+    </section>
+    <section id="c4">
+      <div class="num">04 / 06</div>
+      <h2>Вид на телефоне</h2>
+      <div class="bad">Без meta viewport телефон показывает уменьшенную компьютерную версию: всё мелкое.</div>
+      <h3>Проверка за минуту</h3>
+      <p>F12 → значок телефона → ширина 375.</p>
+      <h3>Как исправить</h3>
+<div class="code"><button class="copy">Скопировать</button><pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</code></pre></div>
+      <p class="note">Проверяйте ширину 375px: так видят сайт с большинства телефонов.</p>
+    </section>
+<figure class="shot"><img src="media/shot-2.jpg" alt="" loading="lazy"><figcaption>Проверь с телефона: там его откроют чаще всего</figcaption></figure>
+    <section id="c5">
+      <div class="num">05 / 06</div>
+      <h2>Вес картинок</h2>
+      <div class="bad">Фото по 5 МБ с телефона — и первый экран грузится секундами.</div>
+      <h3>Проверка за минуту</h3>
+      <p>F12 → Network → Img: что тяжелее 300 КБ?</p>
+      <h3>Как исправить</h3>
+<div class="code"><button class="copy">Скопировать</button><pre><code>&lt;img src=&quot;hero.webp&quot; width=&quot;1600&quot; height=&quot;900&quot; alt=&quot;Арка из шаров у входа&quot; fetchpriority=&quot;high&quot;&gt;
+&lt;img src=&quot;gallery-1.webp&quot; width=&quot;800&quot; height=&quot;600&quot; alt=&quot;Композиция на свадьбу&quot; loading=&quot;lazy&quot;&gt;</code></pre></div>
+      <p class="note">Переведите фото в WebP (например, в squoosh.app). Всё, что ниже первого экрана, — loading=&quot;lazy&quot;.</p>
+    </section>
+    <section id="c6">
+      <div class="num">06 / 06</div>
+      <h2>Согласие на данные</h2>
+      <div class="bad">Форма с телефоном или именем собирает персональные данные. По 152-ФЗ нужно согласие, а с 1 сентября 2025 года его оформляют отдельным документом.</div>
+      <h3>Проверка за минуту</h3>
+      <p>Есть ли у формы галочка согласия, и не стоит ли она заранее?</p>
+      <h3>Как исправить</h3>
+<div class="code"><button class="copy">Скопировать</button><pre><code>&lt;label&gt;
+  &lt;input type=&quot;checkbox&quot; name=&quot;consent&quot; required&gt;
+  Даю &lt;a href=&quot;/consent&quot;&gt;согласие на обработку персональных данных&lt;/a&gt;
+  и принимаю &lt;a href=&quot;/privacy&quot;&gt;политику конфиденциальности&lt;/a&gt;
+&lt;/label&gt;</code></pre></div>
+      <p class="note">Галочка не должна стоять заранее. Тексты согласия и политики лучше заказать у юриста — это не юридическая консультация.</p>
+    </section>
+    <footer>
+      <h2>Нужен сайт целиком?</h2>
+      <p>Делаю сайты под ваш бизнес: дизайн, код и запуск. Напишите мне в директ слово «сайт» — расскажу, как сделать ваш.</p>
+      <a class="cta" href="https://instagram.com/rita.akerman">@rita.akerman</a>
+    </footer>
+  </div>
+<script>
+  document.querySelectorAll('.copy').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const text = btn.parentElement.querySelector('code').textContent;
+      try { await navigator.clipboard.writeText(text); } catch (e) {
+        const area = document.createElement('textarea'); area.value = text; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove();
+      }
+      btn.textContent = 'Скопировано'; btn.classList.add('done');
+      setTimeout(() => { btn.textContent = 'Скопировать'; btn.classList.remove('done'); }, 1600);
+    });
+  });
+</script>
+</body>
+</html>

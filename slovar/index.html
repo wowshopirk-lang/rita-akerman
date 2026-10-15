@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="rita akerman">
+<title>Словарь сайта: 12 слов — гайд rita akerman</title>
+<meta name="description" content="Слова, которые пишет ИИ и говорят разработчики, — простыми словами и с примерами.">
+<meta property="og:title" content="Словарь сайта: 12 слов — гайд rita akerman">
+<meta property="og:description" content="Слова, которые пишет ИИ и говорят разработчики, — простыми словами и с примерами.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  :root { --night: #0B0620; --panel: #140C33; --line: rgba(205, 184, 255, 0.22); --lilac: #CDB8FF; --soft: #C9B6FF; --violet: #6F2CFF; --text: #F4F0FF; }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--night); color: var(--text); font: 400 17px/1.55 'Geologica', system-ui, sans-serif; }
+  a { color: var(--lilac); }
+  code { font-family: 'JetBrains Mono', monospace; font-size: 0.92em; color: #EDE6FF; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  header { padding: 28px 0 8px; }
+  .owner { font: 500 14px 'JetBrains Mono', monospace; color: var(--lilac); letter-spacing: 0.04em; text-decoration: none; }
+  .hero { position: relative; overflow: hidden; border-radius: 24px; padding: 44px 24px 32px; margin-top: 8px; background: #0B0620; }
+  .hero::before, .hero::after { content: ""; position: absolute; width: 45vmax; height: 45vmax; border-radius: 50%; filter: blur(70px); opacity: 0.8; animation: drift 4s ease-in-out infinite alternate; }
+  .hero::before { background: #6F2CFF; top: -15%; left: -10%; }
+  .hero::after { background: var(--accent, #FF7AC6); bottom: -15%; right: -10%; animation: drift-back 5s ease-in-out infinite alternate-reverse; }
+  .hero > * { position: relative; z-index: 1; }
+  @keyframes drift { to { transform: translate(25vmax, 15vmax) scale(1.15); } }
+  @keyframes drift-back { to { transform: translate(-25vmax, -15vmax) scale(1.15); } }
+  .tag { font: 700 13px 'JetBrains Mono', monospace; color: #fff; letter-spacing: 0.12em; }
+  .hero h1 { font-size: clamp(34px, 7.5vw, 60px); line-height: 1.05; margin: 14px 0 16px; font-weight: 600; }
+  .hero p { color: rgba(255, 255, 255, 0.9); font-size: 19px; margin: 0; max-width: 34em; }
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 0; padding: 0; list-style: none; }
+  .toc a { display: inline-block; padding: 8px 14px; border: 1px solid rgba(255, 255, 255, 0.28); border-radius: 999px; text-decoration: none; font-size: 15px; color: #fff; background: rgba(11, 6, 32, 0.35); }
+  section { padding: 40px 0 6px; border-top: 1px solid var(--line); margin-top: 34px; }
+  .num { font: 700 14px 'JetBrains Mono', monospace; color: var(--lilac); }
+  h2 { font-size: clamp(28px, 6vw, 40px); line-height: 1.1; margin: 8px 0 6px; font-weight: 600; }
+  .en { font: 500 15px 'JetBrains Mono', monospace; color: rgba(205, 184, 255, 0.75); margin: 0 0 12px; }
+  h3 { font: 700 13px 'JetBrains Mono', monospace; letter-spacing: 0.1em; color: var(--lilac); margin: 20px 0 8px; text-transform: uppercase; }
+  section p, section li { color: var(--soft); }
+  section ul, section ol { padding-left: 22px; margin: 8px 0 14px; }
+  section li { margin: 6px 0; }
+  .note { font-size: 15px; color: rgba(244, 240, 255, 0.72); }
+  .ex { background: rgba(111, 44, 255, 0.12); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; margin: 10px 0 14px; color: #EDE6FF; }
+  .ex b { font: 700 12px 'JetBrains Mono', monospace; letter-spacing: 0.1em; color: var(--lilac); display: block; margin-bottom: 4px; }
+  .bad { background: rgba(229, 72, 107, 0.12); border: 1px solid rgba(255, 143, 168, 0.4); border-radius: 14px; padding: 12px 16px; margin: 10px 0; color: #FFE1E8; }
+  .good { background: rgba(43, 181, 160, 0.12); border: 1px solid rgba(124, 224, 181, 0.4); border-radius: 14px; padding: 12px 16px; margin: 10px 0; color: #DFF7EE; }
+  .code { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; margin: 0 0 12px; }
+  .code pre { margin: 0; padding: 50px 16px 18px; overflow-x: auto; font: 500 13.5px/1.6 'JetBrains Mono', monospace; color: #E9E2FF; }
+  .code.text pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .copy { position: absolute; top: 8px; right: 8px; font: 600 13px 'Geologica', sans-serif; color: #fff; background: var(--violet); border: 0; border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+  .copy.done { background: #2BB5A0; }
+  .demo { display: grid; place-items: center; min-height: 160px; border: 1px solid var(--line); border-radius: 18px; background: #0E0828; margin: 8px 0 14px; padding: 24px; }
+  footer { margin: 56px 0 0; padding: 40px 0 56px; border-top: 1px solid var(--line); }
+  footer h2 { font-size: 28px; line-height: 1.15; margin: 0 0 10px; }
+  footer p { color: var(--soft); margin: 0 0 18px; }
+  .cta { display: inline-block; padding: 14px 26px; border-radius: 999px; background: var(--violet); color: #fff; text-decoration: none; font-weight: 600; }
+  .src { font-size: 14px; color: rgba(244, 240, 255, 0.6); }
+  @media (prefers-reduced-motion: reduce) { .hero::before, .hero::after { animation: none; } }
+
+
+
+  /* media: live hero and photos (add_media.py) */
+  .hero.live { padding-top: calc(min(62vh, 600px) + 8px); }
+  .hero.live::before, .hero.live::after { opacity: 0.16; }
+  .hero .bg { position: absolute; top: 0; left: 0; width: 100%; height: min(62vh, 600px); object-fit: cover; z-index: 0; }
+  .hero .shade { position: absolute; top: 0; left: 0; width: 100%; height: min(62vh, 600px); z-index: 0; background: linear-gradient(180deg, rgba(11,6,32,0) 55%, #0B0620 100%); }
+  .hero .rec { position: absolute; top: 18px; left: 22px; right: 22px; z-index: 1; display: flex; justify-content: space-between; font: 700 12px 'JetBrains Mono', monospace; letter-spacing: 0.12em; color: rgba(255,255,255,0.85); }
+  .shot { position: relative; margin: 30px 0 6px; }
+  .shot img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 18px; }
+  .shot::before, .shot::after { content: ""; position: absolute; width: 26px; height: 26px; border: 2px solid var(--lilac); }
+  .shot::before { top: -8px; left: -8px; border-right: 0; border-bottom: 0; }
+  .shot::after { bottom: 34px; right: -8px; border-left: 0; border-top: 0; }
+  .shot figcaption { font: 500 13px 'JetBrains Mono', monospace; color: var(--lilac); margin-top: 10px; letter-spacing: 0.03em; }
+  @media (min-width: 760px) { .shot img { aspect-ratio: 16 / 10; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="owner" href="https://instagram.com/rita.akerman">rita akerman · @rita.akerman</a></header>
+    <div class="hero live">
+<video class="bg" src="media/hero.mp4" poster="media/hero.jpg" autoplay muted loop playsinline></video><div class="shade"></div><div class="rec"><span>● REC</span><span>RITA@SITE</span></div>
+
+
+
+      <div class="tag">БЕСПЛАТНЫЙ СЛОВАРЬ</div>
+      <h1>Словарь сайта: 12 слов</h1>
+      <p>Слова, которые пишет ИИ и говорят разработчики, — простыми словами и с примерами.</p>
+      <ul class="toc"><li><a href="#w1">деплой</a></li><li><a href="#w2">хостинг</a></li><li><a href="#w3">домен</a></li><li><a href="#w6">фронтенд</a></li><li><a href="#w7">API</a></li><li><a href="#tip">совет</a></li></ul>
+    </div>
+    <section id="w1">
+      <div class="num">01 / 12</div>
+      <h2>Деплой</h2>
+      <p class="en">deploy</p>
+      <p>Выложить сайт в интернет, чтобы его открыл любой человек по ссылке.</p>
+      <div class="ex"><b>ПРИМЕР</b>«Задеплой на Vercel» — «выложи сайт на хостинг Vercel».</div>
+    </section>
+    <section id="w2">
+      <div class="num">02 / 12</div>
+      <h2>Хостинг</h2>
+      <p class="en">hosting</p>
+      <p>Сервер, на котором лежат файлы сайта и который круглосуточно отдаёт их посетителям.</p>
+      <div class="ex"><b>ПРИМЕР</b>GitHub Pages, Vercel, Timeweb — это хостинги.</div>
+    </section>
+    <section id="w3">
+      <div class="num">03 / 12</div>
+      <h2>Домен</h2>
+      <p class="en">domain</p>
+      <p>Адрес сайта, который набирают в браузере. Покупается отдельно от хостинга и продлевается раз в год.</p>
+      <div class="ex"><b>ПРИМЕР</b>moi-sait.ru — домен.</div>
+    </section>
+<figure class="shot"><img src="media/shot-1.jpg" alt="" loading="lazy"><figcaption>Двенадцать слов — и ИИ перестаёт говорить загадками</figcaption></figure>
+    <section id="w4">
+      <div class="num">04 / 12</div>
+      <h2>Репозиторий</h2>
+      <p class="en">repository, repo</p>
+      <p>Папка проекта, где сохраняется каждая версия кода. Обычно лежит на GitHub.</p>
+      <div class="ex"><b>ПРИМЕР</b>«Закоммить в репо» — «сохрани изменения в истории проекта».</div>
+    </section>
+    <section id="w5">
+      <div class="num">05 / 12</div>
+      <h2>Адаптив</h2>
+      <p class="en">responsive</p>
+      <p>Сайт сам перестраивается под телефон, планшет и компьютер.</p>
+      <div class="ex"><b>ПРИМЕР</b>«Проверь адаптив» — «посмотри, как сайт выглядит на телефоне».</div>
+    </section>
+    <section id="w6">
+      <div class="num">06 / 12</div>
+      <h2>Фронтенд и бэкенд</h2>
+      <p class="en">frontend, backend</p>
+      <p>Фронтенд — то, что видит посетитель: вёрстка, кнопки, анимации. Бэкенд — то, что работает на сервере: заявки, база данных, оплата.</p>
+      <div class="ex"><b>ПРИМЕР</b>«Это на бэке» — «это делается на сервере, не в браузере».</div>
+    </section>
+    <section id="w7">
+      <div class="num">07 / 12</div>
+      <h2>API</h2>
+      <p class="en">Application Programming Interface</p>
+      <p>Способ, которым программы обмениваются данными по правилам.</p>
+      <div class="ex"><b>ПРИМЕР</b>Форма на сайте отправляет заявку в Telegram через API Telegram.</div>
+    </section>
+    <section id="w8">
+      <div class="num">08 / 12</div>
+      <h2>Фреймворк</h2>
+      <p class="en">framework</p>
+      <p>Готовый каркас, на котором собирают сайт: React, Next.js, Vue, Astro.</p>
+      <div class="ex"><b>ПРИМЕР</b>«Сделай на Next.js» — «собери сайт на этом каркасе».</div>
+    </section>
+<figure class="shot"><img src="media/shot-2.jpg" alt="" loading="lazy"><figcaption>Слово понятно — задача сформулирована</figcaption></figure>
+    <section id="w9">
+      <div class="num">09 / 12</div>
+      <h2>SSL и HTTPS</h2>
+      <p class="en">SSL, HTTPS</p>
+      <p>Защищённое соединение: замочек в адресной строке. Без него браузер пишет «Не защищено».</p>
+      <div class="ex"><b>ПРИМЕР</b>На большинстве хостингов сертификат подключается бесплатно.</div>
+    </section>
+    <section id="w10">
+      <div class="num">10 / 12</div>
+      <h2>SEO</h2>
+      <p class="en">Search Engine Optimization</p>
+      <p>Всё, чтобы сайт находили в поиске: заголовки страниц, описания, скорость, понятные тексты.</p>
+      <div class="ex"><b>ПРИМЕР</b>«Проверь SEO» — «проверь title, description и скорость».</div>
+    </section>
+    <section id="w11">
+      <div class="num">11 / 12</div>
+      <h2>CMS</h2>
+      <p class="en">Content Management System</p>
+      <p>Админка, где тексты и фото меняют без кода.</p>
+      <div class="ex"><b>ПРИМЕР</b>WordPress, Strapi — это CMS.</div>
+    </section>
+    <section id="w12">
+      <div class="num">12 / 12</div>
+      <h2>Лендинг</h2>
+      <p class="en">landing page</p>
+      <p>Сайт из одной страницы под одно действие: записаться, купить, оставить заявку.</p>
+      <div class="ex"><b>ПРИМЕР</b>«Нужен лендинг под акцию» — «одна страница под одну цель».</div>
+    </section>
+    <section id="tip">
+      <div class="num">СОВЕТ</div>
+      <h2>Если Claude пишет непонятное</h2>
+      <p>Попросите прямо в чате:</p>
+<div class="code text"><button class="copy">Скопировать</button><pre><code>Объясни, что ты сейчас сделал и что значат слова, которые ты использовал, — как для человека, который не программирует.</code></pre></div>
+    </section>
+    <footer>
+      <h2>Нужен сайт целиком?</h2>
+      <p>Делаю сайты под ваш бизнес: дизайн, код и запуск. Напишите мне в директ слово «сайт» — расскажу, как сделать ваш.</p>
+      <a class="cta" href="https://instagram.com/rita.akerman">@rita.akerman</a>
+    </footer>
+  </div>
+<script>
+  document.querySelectorAll('.copy').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const text = btn.parentElement.querySelector('code').textContent;
+      try { await navigator.clipboard.writeText(text); } catch (e) {
+        const area = document.createElement('textarea'); area.value = text; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove();
+      }
+      btn.textContent = 'Скопировано'; btn.classList.add('done');
+      setTimeout(() => { btn.textContent = 'Скопировать'; btn.classList.remove('done'); }, 1600);
+    });
+  });
+</script>
+</body>
+</html>
